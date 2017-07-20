@@ -11,7 +11,7 @@ RUN apt-get update && \
 
 # Configure apache and required PHP modules
 RUN \
-	docker-php-ext-install mysqli pdo_mysql gettext pcntl sockets gmp mcrypt && \
+	docker-php-ext-install mysqli pdo_mysql gettext pcntl sockets gmp mcrypt gd && \
 	echo ". /etc/environment" >> /etc/apache2/envvars && \
 	a2enmod rewrite
 
