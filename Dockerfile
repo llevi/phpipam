@@ -2,7 +2,7 @@ FROM php:apache
 MAINTAINER Richard Kojedzinszky <krichy@nmdps.net>
 
 ENV PHPIPAM_SOURCE=https://github.com/phpipam/phpipam/archive/ \
-    PHPIPAM_VERSION=master
+    PHPIPAM_VERSION=1.3
 
 # Install required deb packages
 RUN apt-get update && \
