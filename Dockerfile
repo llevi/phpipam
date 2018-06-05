@@ -20,6 +20,9 @@ COPY php.ini /usr/local/etc/php/
 # copy phpipam sources to web dir
 RUN curl -L ${PHPIPAM_SOURCE}/${PHPIPAM_VERSION}.tar.gz | tar -xzf - -C /var/www/html/ --strip-components=1
 
+# FIX upload dir permissions
+RUN chown www-data:www-data app/subnets/import-subnet/upload app/admin/import-export/upload
+
 # Use system environment variables into config.php
 RUN sed \
 	-e "/db.*host/s/^.*/\$db['host'] = getenv('MYSQL_ENV_MYSQL_HOST') != '' ? getenv('MYSQL_ENV_MYSQL_HOST') : 'mysql';/" \
