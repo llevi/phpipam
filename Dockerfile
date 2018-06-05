@@ -1,4 +1,4 @@
-FROM php:apache
+FROM php:7.1-apache
 MAINTAINER Richard Kojedzinszky <krichy@nmdps.net>
 
 ENV PHPIPAM_SOURCE=https://github.com/phpipam/phpipam/archive/ \
@@ -6,7 +6,7 @@ ENV PHPIPAM_SOURCE=https://github.com/phpipam/phpipam/archive/ \
 
 # Install required deb packages
 RUN apt-get update && \
-	apt-get install -y curl git libgmp-dev libmcrypt-dev libpng12-dev && \
+	apt-get install -y curl git libgmp-dev libmcrypt-dev libpng-dev && \
 	rm -rf /var/lib/apt/lists/*
 
 # Configure apache and required PHP modules
