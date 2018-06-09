@@ -6,12 +6,18 @@ ENV PHPIPAM_SOURCE=https://github.com/phpipam/phpipam/archive/ \
 
 # Install required deb packages
 RUN apt-get update && \
-	apt-get install -y curl git libgmp-dev libmcrypt-dev libpng-dev && \
+	apt-get install -y curl git libgmp-dev libmcrypt-dev libpng-dev libjpeg-dev libfreetype6-dev && \
 	rm -rf /var/lib/apt/lists/*
 
 # Configure apache and required PHP modules
 RUN \
-	docker-php-ext-install mysqli pdo_mysql gettext pcntl sockets gmp mcrypt gd && \
+	docker-php-ext-install mysqli pdo_mysql gettext pcntl sockets gmp mcrypt && \
+	docker-php-ext-configure gd \
+		--enable-gd-native-ttf \
+		--with-freetype-dir=/usr/include/freetype2 \
+		--with-png-dir=/usr/include \
+		--with-jpeg-dir=/usr/include && \
+	docker-php-ext-install gd && \
 	echo ". /etc/environment" >> /etc/apache2/envvars && \
 	a2enmod rewrite
 
