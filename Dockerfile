@@ -20,7 +20,6 @@ RUN \
 	docker-php-ext-install gd && \
 	echo ". /etc/environment" >> /etc/apache2/envvars && \
 	a2enmod rewrite
-
 COPY php.ini /usr/local/etc/php/
 
 # copy phpipam sources to web dir
@@ -38,5 +37,8 @@ RUN sed \
 	-e "/db.*port/s/^.*/\$db['port'] = getenv('MYSQL_ENV_MYSQL_PORT') != '' ? getenv('MYSQL_ENV_MYSQL_PORT') : 3306;/" \
 	/var/www/html/config.dist.php > /var/www/html/config.php
 
-EXPOSE 80
+COPY phpipam-entrypoint /usr/local/bin/
+RUN chmod +x /usr/local/bin/phpipam-entrypoint
+ENTRYPOINT ["phpipam-entrypoint"]
 
+EXPOSE 80
