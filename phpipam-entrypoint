@@ -8,7 +8,7 @@ if [ -z "${TRUSTED_IP_ENV}" ]; then #undefined
 else #defined
   echo "defined" > /tmp/TRUSTED_IP_ENV
   echo "RemoteIPHeader X-Forwarded-For" > /etc/apache2/conf-available/remoteip.conf
-  if [ "${TRUSTED_IP_ENV}" -ne "all"]; then
+  if [ "${TRUSTED_IP_ENV}" != "all" ]; then
     echo "RemoteIPTrustedProxy ${TRUSTED_IP_ENV}" >> /etc/apache2/conf-available/remoteip.conf
   fi
   a2enmod remoteip

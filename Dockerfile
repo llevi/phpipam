@@ -40,5 +40,6 @@ RUN sed \
 COPY phpipam-entrypoint /usr/local/bin/
 RUN chmod +x /usr/local/bin/phpipam-entrypoint
 ENTRYPOINT ["phpipam-entrypoint"]
+CMD ["apache2-foreground"]
 
 EXPOSE 80
