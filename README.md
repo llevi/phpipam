@@ -26,7 +26,10 @@ We are linking the two containers and expose the HTTP port.
 
 For proxies:
 Use -e TRUSTED_IP_ENV=IP to allow overwrite remote_addr with X-Forwarded-For by a specified proxy
-use -e TRUSTED_IP_ENV=IP to allow overwrite by any proxy
+use -e TRUSTED_IP_ENV=all to allow overwrite by any proxy
+
+For timezone:
+Use -e TZ=Europe/Budapest
 ### Specific integration (HTTPS, multi-host containers, etc.)
 
 Regarding your requirements and docker setup, you've to expose resources.
