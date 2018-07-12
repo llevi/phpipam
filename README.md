@@ -10,7 +10,7 @@ Learn more on [phpIPAM homepage](http://phpipam.net)
 
 ## How to use this Docker image
 
-### Phpipam 
+### Phpipam
 
 ```bash
 $ docker run -ti -d -p 8080:80 --name ipam \
@@ -22,17 +22,23 @@ $ docker run -ti -d -p 8080:80 --name ipam \
 		rkojedzinszky/phpipam
 ```
 
-We are linking the two containers and expose the HTTP port. 
+We are linking the two containers and expose the HTTP port.
 
+For proxies:
+Use -e TRUSTED_IP_ENV=IP to allow overwrite remote_addr with X-Forwarded-For by a specified proxy
+use -e TRUSTED_IP_ENV=all to allow overwrite by any proxy
+
+For timezone:
+Use -e TZ=Europe/Budapest
 ### Specific integration (HTTPS, multi-host containers, etc.)
 
-Regarding your requirements and docker setup, you've to expose resources. 
+Regarding your requirements and docker setup, you've to expose resources.
 
-For HTTPS, run a reverse-proxy in front of your phpipam container and link it to. 
+For HTTPS, run a reverse-proxy in front of your phpipam container and link it to.
 
-For multi-host containers, expose ports, run etcd or consul to make service discovery works etc. 
+For multi-host containers, expose ports, run etcd or consul to make service discovery works etc.
 
-### Configuration 
+### Configuration
 
 * First you should create the mysql db on the specified mysql server:
 ```

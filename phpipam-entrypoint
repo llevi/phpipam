@@ -1,0 +1,19 @@
+#!/bin/sh
+set -x
+#Check apache environment vars for enable Apache headers
+if [ -z "${TRUSTED_IP_ENV}" ]; then #undefined
+  echo "undefined" > /tmp/TRUSTED_IP_ENV
+  a2dismod remoteip
+  a2disconf remoteip
+else #defined
+  echo "defined" > /tmp/TRUSTED_IP_ENV
+  echo "RemoteIPHeader X-Forwarded-For" > /etc/apache2/conf-available/remoteip.conf
+  if [ "${TRUSTED_IP_ENV}" -ne "all"]; then
+  echo "RemoteIPTrustedProxy ${TRUSTED_IP_ENV}" >> /etc/apache2/conf-available/remoteip.conf
+  fi
+  a2enmod remoteip
+  a2enconf remoteip
+fi
+
+#Start original entrypoint
+apache2-foreground
