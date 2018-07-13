@@ -15,5 +15,9 @@ else #defined
   a2enconf remoteip
 fi
 
+if [ -n "${TZ}" ]; then
+  echo "[Date]" > /usr/local/etc/php/conf.d/timezone.ini
+  echo "date.timezone = \"${TZ}\"" >> /usr/local/etc/php/conf.d/timezone.ini
+fi
 #Start original entrypoint
 exec docker-php-entrypoint "$@"
